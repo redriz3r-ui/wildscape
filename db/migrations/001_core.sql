@@ -1,0 +1,22 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE TABLE IF NOT EXISTS regions (id text PRIMARY KEY, name text NOT NULL, geom geometry(MultiPolygon,4326) NOT NULL, config jsonb NOT NULL);
+CREATE INDEX IF NOT EXISTS regions_geom_idx ON regions USING gist(geom);
+CREATE TABLE IF NOT EXISTS ingest_runs (id uuid PRIMARY KEY, region_id text REFERENCES regions, source text NOT NULL, retrieved_at timestamptz NOT NULL, metadata jsonb NOT NULL);
+CREATE TABLE IF NOT EXISTS raw_records (id bigserial PRIMARY KEY, ingest_run uuid REFERENCES ingest_runs, ordinal integer NOT NULL, source_id text, payload jsonb NOT NULL, UNIQUE(ingest_run,ordinal));
+CREATE FUNCTION raw_records_immutable() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'raw_records are immutable'; END $$;
+CREATE TRIGGER raw_records_immutable BEFORE UPDATE OR DELETE ON raw_records FOR EACH ROW EXECUTE FUNCTION raw_records_immutable();
+CREATE TABLE IF NOT EXISTS taxa (id text PRIMARY KEY, accepted_name text NOT NULL, rank text, metadata jsonb NOT NULL);
+CREATE TABLE IF NOT EXISTS taxon_xrefs (taxon_id text REFERENCES taxa, source text, external_id text, PRIMARY KEY(source,external_id));
+CREATE TABLE IF NOT EXISTS occurrences (id text PRIMARY KEY, taxon_id text REFERENCES taxa, precise_geom geometry(Point,4326) NOT NULL, public_geom geometry(Point,4326), event_date timestamptz, is_sensitive boolean NOT NULL DEFAULT false, duplicate_of text, metadata jsonb NOT NULL);
+CREATE INDEX IF NOT EXISTS occurrences_precise_idx ON occurrences USING gist(precise_geom);
+CREATE INDEX IF NOT EXISTS occurrences_public_idx ON occurrences USING gist(public_geom);
+CREATE INDEX IF NOT EXISTS occurrences_taxon_idx ON occurrences(taxon_id);
+CREATE INDEX IF NOT EXISTS occurrences_date_idx ON occurrences(event_date);
+CREATE TABLE IF NOT EXISTS occurrence_sources (occurrence_id text REFERENCES occurrences, source text, source_id text, ingest_run uuid REFERENCES ingest_runs, PRIMARY KEY(occurrence_id,source,source_id,ingest_run));
+CREATE INDEX IF NOT EXISTS occurrence_source_lookup ON occurrence_sources(source,source_id);
+CREATE TABLE IF NOT EXISTS media (id bigserial PRIMARY KEY, taxon_id text REFERENCES taxa, occurrence_id text REFERENCES occurrences, url text NOT NULL, thumbnail_url text, creator text, source text, license text, attribution text, UNIQUE(occurrence_id,url));
+CREATE TABLE IF NOT EXISTS conservation_status (taxon_id text REFERENCES taxa, authority text, status text, metadata jsonb, PRIMARY KEY(taxon_id,authority));
+CREATE TABLE IF NOT EXISTS sensitive_taxa (taxon_id text PRIMARY KEY REFERENCES taxa, grid_m integer NOT NULL DEFAULT 5000, authority text NOT NULL);
+CREATE TABLE IF NOT EXISTS region_occurrences (region_id text REFERENCES regions, occurrence_id text REFERENCES occurrences, PRIMARY KEY(region_id,occurrence_id));
+CREATE TABLE IF NOT EXISTS builds (id bigserial PRIMARY KEY, region_id text REFERENCES regions, built_at timestamptz DEFAULT now(), manifest jsonb NOT NULL);
+-- Development database is private infrastructure. No browser role or public API is created.

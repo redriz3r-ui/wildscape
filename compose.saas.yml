@@ -1,0 +1,56 @@
+services:
+  database:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wildscape_saas
+      POSTGRES_USER: wildscape_saas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a strong database password}
+    volumes:
+      - saas-database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U wildscape_saas -d wildscape_saas"]
+      interval: 5s
+      retries: 20
+  api:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    restart: unless-stopped
+    environment:
+      WILDSCAPE_ENV: production
+      WILDSCAPE_PUBLIC_URL: https://${WILDSCAPE_DOMAIN}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@localhost}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?Set a random application secret}
+      DJANGO_ALLOWED_HOSTS: ${WILDSCAPE_DOMAIN:?Set the deployment domain}
+      DJANGO_CSRF_ORIGINS: https://${WILDSCAPE_DOMAIN}
+      POSTGRES_HOST: database
+      POSTGRES_DB: wildscape_saas
+      POSTGRES_USER: wildscape_saas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      database:
+        condition: service_healthy
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+  web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.web
+    restart: unless-stopped
+    environment:
+      WILDSCAPE_DOMAIN: ${WILDSCAPE_DOMAIN}
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on: [api]
+volumes:
+  saas-database:
+  caddy-data:
+  caddy-config:

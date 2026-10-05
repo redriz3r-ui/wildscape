@@ -1,0 +1,25 @@
+id: example
+name: Your verified landscape
+fixture: false
+ecosystem: {system: LANDFIRE_BPS, code: 10820}
+aoi:
+  method: configured_bbox
+  bbox: null
+  verified: false
+terrain:
+  dem_source: usgs_3dep
+  imagery_source: usgs_naip
+  resolution: 257
+  vertical_exaggeration: 1.0
+# Set paths to official clipped GeoTIFFs; or fetch terrain using the CLI.
+# LANDFIRE categorical codes require release-specific value mappings.
+vegetation:
+  seed: 10820
+  max_instances: 14000
+  bps_values: []
+  evc_mapping: {}
+  evh_mapping: {}
+  evt_weights: {}
+biodiversity: {primary_occurrence_source: gbif, start_date: '1990-01-01'}
+privacy: {protect_sensitive_taxa: true, public_grid_m: 5000, sensitive_taxon_ids: []}
+media: {enabled: true, allowed_licenses: [CC0, CC-BY, CC-BY-SA]}

@@ -1,0 +1,882 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font:
+    14px/1.5 system-ui,
+    sans-serif;
+  color: #203c36;
+  background: #f3f5f1;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+.file-button {
+  border: 1px solid #bccbc3;
+  background: #fff;
+  color: #23483d;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover,
+.file-button:hover {
+  background: #e5eee7;
+}
+button.primary {
+  background: #225b49;
+  color: white;
+}
+a {
+  color: #176752;
+}
+input,
+select,
+textarea {
+  padding: 8px;
+  border: 1px solid #bdcbc2;
+  border-radius: 4px;
+  background: white;
+  color: #253e35;
+  min-width: 0;
+}
+textarea {
+  resize: vertical;
+}
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+form {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 25px;
+}
+form input[type="number"] {
+  width: 100%;
+}
+form input[type="number"] {
+  appearance: textfield;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.check {
+  display: flex;
+  align-items: center;
+}
+.workspace-header {
+  background: #183d32;
+  color: white;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.workspace-header > div {
+  margin-right: auto;
+}
+.workspace-header strong {
+  letter-spacing: 3px;
+  font-size: 21px;
+}
+.workspace-header span {
+  display: block;
+  font-size: 11px;
+  color: #b8d3c5;
+}
+.workspace-header a {
+  color: #d4e5d9;
+}
+.workspace-header select {
+  max-width: 260px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  background: white;
+  border-bottom: 1px solid #d5ded6;
+}
+nav button {
+  border: 0;
+}
+nav button.active {
+  background: #dceade;
+  font-weight: 700;
+}
+#save-state {
+  margin-left: auto;
+  font-size: 11px;
+  max-width: 40%;
+  color: #496253;
+}
+#save-state[role="alert"] {
+  color: #9a391f;
+}
+.workspace-body {
+  display: grid;
+  grid-template-columns: minmax(400px, 1.35fr) minmax(390px, 1fr);
+  height: calc(100vh - 162px);
+  min-height: 620px;
+}
+.map-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #e5ebe4;
+}
+.map-toolbar {
+  padding: 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.map-toolbar button {
+  padding: 5px 9px;
+  font-size: 12px;
+}
+.map-toolbar label {
+  display: flex;
+  align-items: center;
+}
+#plan-map {
+  flex: 1;
+  min-height: 360px;
+  position: relative;
+  overflow: hidden;
+  background: #243d34;
+}
+.plan-map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  touch-action: none;
+  cursor: grab;
+}
+.plan-map.drawing {
+  cursor: crosshair;
+}
+.map-north,
+.map-scale,
+.draw-tip {
+  position: absolute;
+  background: #153a30df;
+  color: white;
+  padding: 7px 10px;
+  pointer-events: none;
+  font-size: 11px;
+}
+.map-north {
+  top: 12px;
+  right: 12px;
+}
+.map-scale {
+  bottom: 12px;
+  left: 12px;
+}
+.draw-tip {
+  top: 12px;
+  left: 12px;
+}
+.map-caption,
+#coordinates {
+  padding: 9px 14px;
+  font-size: 11px;
+  color: #4c6257;
+}
+#coordinates {
+  padding-top: 0;
+  font-family: monospace;
+}
+#panel {
+  overflow: auto;
+  background: #fbfcf8;
+  padding: 26px 28px;
+  border-left: 1px solid #cbd8cc;
+}
+.panel-heading {
+  border-bottom: 1px solid #d8e1d5;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+.eyebrow {
+  letter-spacing: 1.5px;
+  font-size: 10px;
+  color: #6a7864;
+}
+h1 {
+  font:
+    500 28px/1.2 Georgia,
+    serif;
+  margin: 12px 0 20px;
+}
+h2 {
+  font-size: 19px;
+}
+h3 {
+  font-size: 15px;
+}
+.metrics {
+  display: flex;
+  gap: 25px;
+}
+.metrics span {
+  font-size: 10px;
+  color: #657767;
+}
+.metrics b {
+  display: block;
+  color: #264936;
+  font-size: 22px;
+  font-weight: 500;
+}
+p {
+  color: #55685a;
+}
+.note {
+  background: #edf0df;
+  padding: 14px;
+  font-size: 12px;
+}
+details {
+  border-top: 1px solid #d5dfd2;
+  margin: 20px 0;
+  padding-top: 14px;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.file-button {
+  display: inline-block;
+}
+input[type="file"] {
+  display: block;
+  font-size: 11px;
+  border: 0;
+  max-width: 100%;
+}
+.species-list {
+  max-height: 290px;
+  overflow: auto;
+  border: 1px solid #ccd9cc;
+  margin: 12px 0;
+}
+.species-row {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #e0e6dc;
+  border-radius: 0;
+  text-align: left;
+  padding: 12px;
+}
+.species-row[hidden] {
+  display: none;
+}
+.species-row span,
+.species-row small {
+  display: block;
+}
+.species-row.selected {
+  background: #e2ecdf;
+}
+.species-row strong {
+  font-style: italic;
+}
+.species-row small {
+  font-size: 10px;
+  color: #526a57;
+}
+article {
+  background: #f0f4ec;
+  padding: 15px;
+  margin: 15px 0;
+}
+.habitat-class {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  font-size: 11px;
+  margin: 9px 0;
+}
+.habitat-class i {
+  height: 12px;
+}
+.habitat-class b {
+  font-weight: 500;
+}
+.downloads {
+  display: grid;
+  gap: 10px;
+}
+.hash {
+  overflow-wrap: anywhere;
+  font: 10px monospace;
+}
+footer {
+  padding: 10px 22px;
+  font-size: 10px;
+  color: #52644c;
+  border-top: 1px solid #d7dfd3;
+}
+.loading {
+  padding: 50px;
+}
+@media (max-width: 950px) {
+  .workspace-body {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+  .map-column {
+    height: 550px;
+  }
+  #panel {
+    overflow: visible;
+    border-left: 0;
+  }
+  .workspace-header {
+    padding: 12px;
+  }
+  nav {
+    overflow: auto;
+    flex-wrap: wrap;
+  }
+  #save-state {
+    max-width: 100%;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .workspace-header select {
+    width: 100%;
+    max-width: 100%;
+  }
+  .map-column {
+    height: 470px;
+  }
+  #panel {
+    padding: 20px;
+  }
+  nav button {
+    padding: 7px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 951px) {
+  .screening {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .workspace-body {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+  .workspace-header,
+  nav,
+  footer {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 950px) {
+  .map-column {
+    height: auto;
+  }
+  #plan-map {
+    height: 360px;
+    flex: none;
+  }
+  .map-caption,
+  #coordinates {
+    flex: none;
+  }
+}
+.earth-panel h1 {
+  margin-bottom: 8px;
+}
+.earth-panel h2 {
+  margin: 25px 0 12px;
+  font-size: 17px;
+}
+.earth-panel p {
+  margin: 9px 0 15px;
+}
+.earth-location {
+  display: grid;
+  gap: 3px;
+  padding: 14px 16px;
+  background: #e7efe7;
+  border-left: 3px solid #37816b;
+}
+.earth-location span {
+  font:
+    18px Georgia,
+    serif;
+  color: #214c3c;
+}
+.earth-location small {
+  font-size: 10px;
+  color: #5f7869;
+}
+.earth-layer {
+  display: flex;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #d7e2d9;
+}
+.earth-layer > div {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+}
+.earth-layer small {
+  color: #648474;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.earth-layer strong {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.earth-layer span:not(.layer-chip) {
+  font-size: 11px;
+  color: #637466;
+}
+.earth-layer a {
+  font-size: 11px;
+}
+.layer-chip {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #b2bfb1;
+  flex: none;
+  border-radius: 2px;
+}
+.earth-caveat {
+  font-size: 11px;
+  color: #607267;
+  background: #f1f3e9;
+  padding: 10px 12px;
+}
+.earth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.earth-row select {
+  max-width: 120px;
+}
+.earth-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.earth-toggle button {
+  font-size: 11px;
+}
+.earth-toggle button.active {
+  background: #275a49;
+  color: white;
+}
+#explore-search {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+.earth-species-list {
+  max-height: 255px;
+  overflow: auto;
+  border: 1px solid #d9e1d8;
+}
+.earth-species {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid #e4e9e1;
+  border-radius: 0;
+}
+.earth-species.selected {
+  background: #e0ece1;
+}
+.earth-species span {
+  display: grid;
+}
+.earth-species strong {
+  font-size: 12px;
+}
+.earth-species em,
+.earth-species span:last-child {
+  font-size: 10px;
+  color: #65776a;
+}
+.earth-detail {
+  margin-top: 18px;
+}
+.earth-detail h3 {
+  margin: 0;
+  font:
+    italic 21px Georgia,
+    serif;
+}
+.earth-stat {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 7px;
+  align-items: center;
+  border-block: 1px solid #d6e0d5;
+  padding: 11px 0;
+}
+.earth-stat b {
+  font-size: 20px;
+  font-weight: 500;
+}
+.earth-stat span {
+  color: #607066;
+  font-size: 11px;
+}
+.earth-record {
+  border-top: 1px solid #dce4da;
+  padding: 10px 0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.attribute-grid {
+  margin: 10px 0 16px;
+  border-top: 1px solid #dbe4dc;
+  font-size: 12px;
+}
+.attribute-row {
+  display: grid;
+  grid-template-columns: minmax(105px, 38%) minmax(0, 1fr);
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid #e6ece5;
+  align-items: start;
+}
+.attribute-row dt {
+  color: #52644c;
+  font-size: 11px;
+}
+.attribute-row dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #233c2e;
+  font-weight: 550;
+}
+.earth-layer > div .attribute-grid,
+.earth-photo .attribute-grid {
+  margin: 5px 0 0;
+}
+.earth-layer h3 {
+  margin: 0;
+  font-size: 13px;
+}
+.earth-overview .attribute-grid {
+  width: 100%;
+}
+.attribute-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.attribute-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  text-align: left;
+}
+.attribute-table th,
+.attribute-table td {
+  padding: 7px 5px;
+  border-bottom: 1px solid #dfe7de;
+  vertical-align: top;
+}
+.attribute-table th {
+  color: #52644c;
+  font-weight: 600;
+}
+.class-swatch {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  border: 1px solid #a6b4a8;
+}
+
+.earth-overview {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0 0;
+  color: #597162;
+  font-size: 11px;
+}
+.earth-overview span {
+  flex: 1;
+}
+.earth-overview b {
+  color: #264d3a;
+  font-size: 17px;
+  margin-right: 3px;
+}
+#map-key:empty {
+  display: none;
+}
+#map-key {
+  background: #f5f7ef;
+  border-top: 1px solid #cdd8cd;
+  font-size: 11px;
+}
+#map-key details {
+  margin: 0;
+  padding: 6px 13px;
+  border: 0;
+}
+#map-key summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+#map-key p {
+  margin: 6px 0;
+  font-size: 11px;
+}
+.map-key-list {
+  max-height: 155px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3px 12px;
+  padding: 9px 0;
+}
+.map-key-list > div {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.map-key-list i {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  border: 1px solid #bdc7ba;
+}
+.earth-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0;
+}
+.earth-groups button {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-color: #d0ddd0;
+  font-size: 11px;
+  text-align: left;
+}
+.earth-groups button.active {
+  background: #275a49;
+  color: white;
+}
+.earth-groups button b {
+  font-size: 12px;
+  font-weight: 700;
+}
+.earth-order {
+  margin: 9px 0 12px;
+}
+.earth-species-list {
+  max-height: 350px;
+}
+.earth-species {
+  justify-content: flex-start;
+  gap: 11px;
+  min-height: 70px;
+}
+.earth-thumb {
+  flex: none;
+  display: grid !important;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  background: #e3ecdf;
+  border-radius: 4px;
+  color: #44715c;
+  font-size: 27px;
+}
+.earth-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.earth-species-name {
+  flex: 1;
+  min-width: 0;
+}
+.earth-species-name strong,
+.earth-species-name em,
+.earth-species-name small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.earth-species-name small {
+  color: #52644c;
+}
+.earth-species-count {
+  flex: none;
+  text-align: right;
+  font-size: 10px;
+}
+.earth-species-count b {
+  display: block;
+  color: #2a684d;
+  font-size: 14px;
+}
+.earth-photo {
+  margin: 0 0 17px;
+}
+.earth-photo img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: #e8eee5;
+}
+.earth-photo figcaption {
+  background: #edf2e9;
+  padding: 8px 10px;
+  color: #5b7163;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.earth-photo-missing {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  height: 115px;
+  background: #e7eee5;
+  color: #6e8773;
+  margin-bottom: 17px;
+}
+.earth-photo-missing span {
+  font-size: 40px;
+}
+.species-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.species-thumb {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e3ecdf;
+  font-size: 23px;
+}
+.species-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.species-meta {
+  display: block;
+  min-width: 0;
+}
+
+.account-screen {
+  max-width: 480px;
+  margin: 8vh auto;
+  padding: 32px;
+  background: #f7f9f3;
+  border: 1px solid #ccd8ce;
+  border-radius: 8px;
+  color: #214334;
+  font:
+    14px/1.6 system-ui,
+    sans-serif;
+}
+.account-screen label,
+.workspace-dialog label {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0;
+}
+.account-screen input,
+.workspace-dialog input,
+.workspace-dialog select {
+  padding: 11px;
+  border: 1px solid #b9cbbf;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.account-screen button,
+.workspace-dialog button {
+  padding: 9px 13px;
+  border: 1px solid #b8ccbd;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+.account-screen [role="alert"] {
+  color: #8f3324;
+}
+.workspace-dialog {
+  max-width: 650px;
+  width: calc(100vw - 48px);
+  max-height: 80vh;
+  overflow: auto;
+  border: 1px solid #b9cbbf;
+  border-radius: 8px;
+  padding: 24px;
+  background: #f7f9f3;
+  color: #214334;
+  font:
+    13px/1.6 system-ui,
+    sans-serif;
+}
+.workspace-dialog::backdrop {
+  background: #132f27aa;
+}
+.workspace-dialog .dialog-close {
+  float: right;
+}
+.workspace-activity {
+  max-height: 240px;
+  overflow: auto;
+}
+
+.account-screen .eyebrow { color: #52644c; }

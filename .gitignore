@@ -1,0 +1,22 @@
+.venv/
+node_modules/
+web/dist/
+.env
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+web/test-results/
+web/playwright-report/
+data_raw/*
+!data_raw/.gitkeep
+data_generated/*
+!data_generated/.gitkeep
+.DS_Store
+
+# Private SaaS state
+server/*.sqlite3
+server/*.sqlite3-*
+server/staticfiles/
+deploy/production.env
+backups/

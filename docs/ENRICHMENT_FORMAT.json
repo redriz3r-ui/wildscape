@@ -1,0 +1,9 @@
+[
+  {
+    "taxon_id": "CANONICAL_TAXON_ID",
+    "is_sensitive": true,
+    "conservation": [
+      {"authority": "Authorized metadata provider", "status": "Verbatim authorized status", "url": "https://provider.example/terms"}
+    ]
+  }
+]

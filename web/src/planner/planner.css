@@ -1,0 +1,218 @@
+.planner {
+  background: #f5f7f0;
+  color: #223e31;
+  font:
+    14px/1.5 system-ui,
+    sans-serif;
+  min-height: 100vh;
+}
+.planner-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(380px, 0.8fr);
+  height: calc(100vh - 76px);
+}
+.planner-map-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#mojave-map {
+  flex: 1;
+  min-height: 400px;
+  background: #d4d7c6;
+}
+.planner-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+.planner-toolbar label {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.planner-panel {
+  padding: 24px;
+  overflow-y: auto;
+  border-left: 1px solid #c9d5c9;
+}
+.planner-panel h1 {
+  font:
+    28px Georgia,
+    serif;
+  line-height: 1.15;
+}
+.planner-panel h2 {
+  font-size: 17px;
+  margin-top: 24px;
+}
+.planner-panel h3 {
+  font-size: 14px;
+}
+.planner label {
+  display: grid;
+  gap: 5px;
+  margin: 12px 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.planner input,
+.planner select,
+.planner textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px;
+  border: 1px solid #adbfaf;
+  border-radius: 4px;
+  background: #fff;
+  color: #223e31;
+}
+.planner button {
+  padding: 9px 12px;
+  background: #edf2e8;
+  border: 1px solid #acc0ad;
+  border-radius: 4px;
+  color: #234735;
+  cursor: pointer;
+}
+.planner button.primary {
+  background: #234d3c;
+  color: #fff;
+}
+.planner button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.coordinate-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.planner-map-note {
+  font-size: 11px;
+  padding: 8px 14px;
+  margin: 0;
+  background: #e6ede3;
+}
+#planner-status {
+  padding: 12px;
+  background: #e5eddf;
+  border-left: 3px solid #446b4e;
+  font-size: 12px;
+}
+.planner-source {
+  padding: 8px 0;
+  border-bottom: 1px solid #ccd8c8;
+}
+.source-unavailable {
+  border-left: 3px solid #987147;
+  padding-left: 12px;
+}
+.saved-site {
+  display: grid;
+  width: 100%;
+  text-align: left;
+  gap: 4px;
+  margin: 6px 0;
+}
+.planner a {
+  color: #285d4b;
+}
+.planner .workspace-header a {
+  color: #fff;
+}
+.planner .eyebrow,
+.account-screen .eyebrow {
+  color: #52644c;
+}
+@media (max-width: 800px) {
+  .planner-layout {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .planner-map-column {
+    height: 58vh;
+  }
+  .planner-panel {
+    overflow: visible;
+    border: 0;
+    padding: 20px;
+  }
+  #mojave-map {
+    min-height: 300px;
+  }
+  .planner .workspace-header {
+    flex-wrap: wrap;
+  }
+  .planner-toolbar {
+    padding: 8px;
+    gap: 5px;
+  }
+  .planner-toolbar label {
+    font-size: 10px;
+  }
+}
+.record-search {
+  border: 1px solid #c7d6c5;
+  border-radius: 6px;
+  padding: 12px;
+  background: #eef3e9;
+  margin: 16px 0;
+}
+.record-search h2 {
+  margin: 0;
+}
+.record-search p {
+  font-size: 12px;
+}
+.record-controls {
+  display: grid;
+  grid-template-columns: minmax(125px, 1fr) auto;
+  align-items: end;
+  gap: 8px;
+}
+.record-controls label {
+  margin: 0;
+}
+.record-controls button {
+  white-space: nowrap;
+}
+#areas-status {
+  font-size: 12px;
+  color: #334d3e;
+}
+#area-results {
+  max-height: 260px;
+  overflow-y: auto;
+}
+.record-area {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 4px 0;
+}
+.record-area button:first-child {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+  text-align: left;
+}
+.record-area small {
+  font-size: 10px;
+}
+.record-area button:last-child {
+  font-size: 11px;
+}
+
+@media (max-width: 1150px) {
+  .record-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+  .record-controls button {
+    grid-column: 1 / -1;
+  }
+}

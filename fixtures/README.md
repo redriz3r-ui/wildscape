@@ -1,0 +1,1 @@
+All rasters and occurrence records here are deterministic synthetic tests. Coordinates are a test footprint, not a verified BpS location. Taxon labels exercise the field guide; no occurrence is a biological claim. CC0.

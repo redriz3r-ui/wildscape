@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgis/postgis:17-3.5-alpine
+    platform: linux/amd64
+    environment:
+      POSTGRES_USER: wildscape
+      POSTGRES_PASSWORD: wildscape
+      POSTGRES_DB: wildscape
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - postgis-data:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wildscape -d wildscape"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  postgis-data:

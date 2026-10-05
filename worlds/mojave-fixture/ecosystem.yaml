@@ -1,0 +1,12 @@
+name: Mojave Mid-Elevation Mixed Desert Scrub
+code: 10820
+placement_note: Data-informed visualization, not exact mapped plant locations.
+models:
+  blackbrush: {weight: 0.50, color: '#535646', scale: 1.2}
+  ephedra: {weight: 0.17, color: '#718064', scale: 1.3}
+  buckwheat: {weight: 0.10, color: '#8b8265', scale: 0.8}
+  grass: {weight: 0.08, color: '#b6a078', scale: 0.7}
+  yucca: {weight: 0.06, color: '#788064', scale: 2.5}
+  joshua: {weight: 0.01, color: '#656b50', scale: 4.5}
+  cactus: {weight: 0.02, color: '#78816a', scale: 0.8}
+  rock: {weight: 0.06, color: '#a39380', scale: 1.2}

@@ -1,0 +1,40 @@
+id: mojave-fixture
+name: "Mojave \xB7 synthetic test landscape"
+ecosystem:
+  system: LANDFIRE_BPS
+  code: 10820
+fixture: true
+aoi:
+  method: configured_bbox
+  bbox:
+  - -115.65
+  - 35.25
+  - -115.49
+  - 35.38
+  verified: false
+terrain:
+  dem_source: usgs_3dep
+  imagery_source: usgs_naip
+  vertical_exaggeration: 1.0
+  resolution: 129
+vegetation:
+  source: landfire
+  seed: 10820
+  max_instances: 14000
+  use_evt: true
+  use_evc: true
+  use_evh: true
+biodiversity:
+  primary_occurrence_source: gbif
+  start_date: 1990-01-01
+privacy:
+  protect_sensitive_taxa: true
+  public_grid_m: 5000
+  sensitive_taxon_ids:
+  - fixture-1
+media:
+  enabled: true
+  allowed_licenses:
+  - CC0
+  - CC-BY
+  - CC-BY-SA
